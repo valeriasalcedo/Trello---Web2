@@ -1,0 +1,8 @@
+{
+    "config" : [{
+        "database": "Trello",
+        "user": "postgres",
+        "password": "Apple1323.",
+        "port": 5432
+    }]
+}
