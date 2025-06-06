@@ -63,7 +63,7 @@ app.post('/logout', async (req, res) => {
   }
 });
 
-// 8) Ejemplo de ruta protegida: sólo accesible si existe sesión activa
+// 8) Ruta protegida: sólo accesible si existe sesión activa
 app.get('/protected', (req, res) => {
   if (sessionManager.sessionExist(req)) {
     return res.send(`🛡️ Bienvenido, ${req.session.userName}`);
