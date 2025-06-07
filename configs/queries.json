@@ -1,0 +1,6 @@
+{
+    "public":
+        {
+            "getUser" : "  SELECT u.id AS id_user, u.password AS password, COALESCE(up.role_id, p.role_id) AS fk_id_profile FROM users u LEFT JOIN user_profiles up ON u.id = up.user_id LEFT JOIN people p ON u.person_id = p.id WHERE u.email = $1;"
+        }
+}
