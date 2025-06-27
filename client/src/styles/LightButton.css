@@ -1,5 +1,5 @@
 .light-button {
-  padding: 1px 15px;                 /* Muy fino en altura */
+  padding: 1px 15px;               
   border-radius: 9999px;
   border: 2px solid #3a8bff;
   background-color: #111;
@@ -10,9 +10,9 @@
   transition: all 0.3s ease;
   box-shadow: 0 0 6px rgba(58, 139, 255, 0.4);
   display: inline-flex;
-  align-items: center;   /* 👈 pega el texto arriba */
-  justify-content: center;         /* Centrado horizontal */
-  line-height: 1;                   /* Elimina espacio extra */
+  align-items: center;   
+  justify-content: center;         
+  line-height: 1;                  
   height: 50px;
   width: 80px;
   min-height: unset;

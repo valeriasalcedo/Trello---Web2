@@ -13,7 +13,7 @@
   position: absolute;
   inset: 0;
   z-index: 0;
-  pointer-events: none; /* Para que el fondo no interfiera con clics */
+  pointer-events: none;
 }
 
 .hero-content {
@@ -44,5 +44,5 @@
   position: absolute;
   top: 0;
   width: 100%;
-  z-index: 2; /* Encima de aurora y contenido */
+  z-index: 2; 
 }
