@@ -1,0 +1,38 @@
+.navbar {
+  position: absolute; /* Posición libre sobre el Hero */
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1.2rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  background: transparent;
+  color: white;
+  font-family: 'Manrope', sans-serif;
+}
+
+.navbar-logo img {
+  height: 80px;
+  margin-left: 30%;
+  width: auto;
+  object-fit: contain;
+}
+
+.navbar-links {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-links li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.navbar-links li a:hover {
+  color: white;
+}
