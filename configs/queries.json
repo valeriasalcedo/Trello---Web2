@@ -1,6 +1,42 @@
 {
-    "public":
-        {
-            "getUser" : "  SELECT u.id AS id_user, u.password AS password, COALESCE(up.role_id, p.role_id) AS fk_id_profile FROM users u LEFT JOIN user_profiles up ON u.id = up.user_id LEFT JOIN people p ON u.person_id = p.id WHERE u.email = $1;"
-        }
+  "public": {
+    "createBoard": "INSERT INTO boards (name, description, owner_id) VALUES ($1, $2, $3) RETURNING *;",
+    "getBoardsByUser": "SELECT b.* FROM boards b JOIN board_members bm ON b.id = bm.board_id WHERE bm.user_id = $1;",
+    "updateBoard": "UPDATE boards SET name = $1, description = $2 WHERE id = $3;",
+    "deleteBoard": "DELETE FROM boards WHERE id = $1;",
+    "getBoardMembers": "SELECT u.id, u.name, bm.role FROM users u JOIN board_members bm ON u.id = bm.user_id WHERE bm.board_id = $1;",
+    "addMemberToBoard": "INSERT INTO board_members (user_id, board_id, role) VALUES ($1, $2, $3);",
+
+    "createList": "INSERT INTO lists (board_id, name, position) VALUES ($1, $2, $3) RETURNING *;",
+    "getListsByBoard": "SELECT * FROM lists WHERE board_id = $1 ORDER BY position ASC;",
+    "updateList": "UPDATE lists SET name = $1, position = $2 WHERE id = $3;",
+    "deleteList": "DELETE FROM lists WHERE id = $1;",
+
+    "createCard": "INSERT INTO cards (list_id, title, description, position, due_date, created_by) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *;",
+    "getCardsByList": "SELECT * FROM cards WHERE list_id = $1 ORDER BY position ASC;",
+    "updateCard": "UPDATE cards SET title = $1, description = $2, position = $3, due_date = $4 WHERE id = $5;",
+    "deleteCard": "DELETE FROM cards WHERE id = $1;",
+    "assignUserToCard": "INSERT INTO card_assignments (card_id, user_id) VALUES ($1, $2);",
+    "moveCardToList": "UPDATE cards SET list_id = $1, position = $2 WHERE id = $3;",
+
+    "addComment": "INSERT INTO comments (card_id, user_id, content) VALUES ($1, $2, $3) RETURNING *;",
+    "getCommentsByCard": "SELECT c.*, u.name FROM comments c JOIN users u ON u.id = c.user_id WHERE card_id = $1 ORDER BY created_at DESC;",
+    "deleteComment": "DELETE FROM comments WHERE id = $1;",
+
+    "createLabel": "INSERT INTO labels (name, color, board_id) VALUES ($1, $2, $3) RETURNING *;",
+    "getLabelsByBoard": "SELECT * FROM labels WHERE board_id = $1;",
+    "updateLabel": "UPDATE labels SET name = $1, color = $2 WHERE id = $3;",
+    "deleteLabel": "DELETE FROM labels WHERE id = $1;",
+    "addLabelToCard": "INSERT INTO card_labels (card_id, label_id) VALUES ($1, $2);",
+    "removeLabelFromCard": "DELETE FROM card_labels WHERE card_id = $1 AND label_id = $2;",
+    "getLabelsByCard": "SELECT l.* FROM labels l JOIN card_labels cl ON l.id = cl.label_id WHERE cl.card_id = $1;",
+
+    "uploadAttachment": "INSERT INTO attachments (card_id, filename, file_url) VALUES ($1, $2, $3) RETURNING *;",
+    "getAttachmentsByCard": "SELECT * FROM attachments WHERE card_id = $1 ORDER BY uploaded_at DESC;",
+    "deleteAttachment": "DELETE FROM attachments WHERE id = $1;",
+
+    "logActivity": "INSERT INTO activity_log (user_id, card_id, action) VALUES ($1, $2, $3) RETURNING *;",
+    "getActivityByCard": "SELECT a.*, u.name FROM activity_log a LEFT JOIN users u ON a.user_id = u.id WHERE a.card_id = $1 ORDER BY timestamp DESC;",
+    "getActivityByUser": "SELECT * FROM activity_log WHERE user_id = $1 ORDER BY timestamp DESC;"
+  }
 }
